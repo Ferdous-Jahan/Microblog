@@ -13,18 +13,18 @@ router.post("/register", (req, res) => {
         ? res.send("An account with this email already exists.")
         : user
             .save()
-            .then((result) => res.send(result))
+            .then((result) => res.json(result))
             .catch((error) => res.status(400).send(error));
     })
     .catch((err) => res.send(err));
 });
 
-router.get("/login", (req, res) => {
+router.post("/login", (req, res) => {
   User.findOne({
     email: req.body.email,
     password: req.body.password,
   })
-    .then((result) => (result ? res.send(result) : res.send("User not found")))
+    .then((result) => res.json(result))
     .catch((err) => res.status(401).send(err));
 });
 
