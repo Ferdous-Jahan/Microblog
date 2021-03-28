@@ -1,6 +1,10 @@
-import { SET_CURRENT_USER } from "../actions/types";
+import { SET_CURRENT_USER, REMOVE_CURRENT_USER } from "../actions/types";
 
-const authReducer = (state = {}, action) => {
+const initialState = {
+  isLoggedIn: false,
+};
+
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
@@ -8,6 +12,11 @@ const authReducer = (state = {}, action) => {
         email: action.data.email,
         username: action.data.name,
         id: action.data._id,
+        isLoggedIn: true,
+      };
+    case REMOVE_CURRENT_USER:
+      return {
+        isLoggedIn: false,
       };
     default:
       return state;

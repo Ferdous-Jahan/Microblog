@@ -3,6 +3,7 @@ const Post = require("../model/Post");
 
 router.get("/", (req, res) => {
   Post.find()
+    .sort({ createdAt: "desc" })
     .then((result) => res.send(result))
     .catch((err) => res.send(err));
 });
@@ -17,6 +18,7 @@ router.post("/create", (req, res) => {
   const post = new Post({
     body: req.body.body,
     userId: req.body.userId,
+    name: req.body.name,
   });
   post
     .save()
