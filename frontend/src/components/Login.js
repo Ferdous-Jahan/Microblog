@@ -7,6 +7,7 @@ import { setCurrentUser } from "../redux/actions/authActions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { api } from "../constants/endpoints";
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -24,7 +25,7 @@ const Login = () => {
 
   const handleLogin = () => {
     axios
-      .post("http://localhost:8000/api/user/login", {
+      .post(`${api}/api/user/login`, {
         email: email,
         password: password,
       })

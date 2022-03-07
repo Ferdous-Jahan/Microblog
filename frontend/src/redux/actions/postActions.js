@@ -11,6 +11,7 @@ import {
   LIKE,
   DISLIKE,
 } from "../actions/types";
+import { api } from "../../constants/endpoints";
 
 export const fetchAllPost = () => {
   return {
@@ -78,7 +79,7 @@ export const dislike = () => {
 export const fetchPost = () => (dispatch) => {
   dispatch(fetchAllPost());
   axios
-    .get("http://localhost:8000/api/post")
+    .get(`${api}/api/post/`)
     .then((res) =>
       res.data
         ? dispatch(storeAllPost(res.data))
@@ -90,7 +91,7 @@ export const fetchPost = () => (dispatch) => {
 export const fetchPostById = (id) => (dispatch) => {
   dispatch(fetchOnePost());
   axios
-    .get(`http://localhost:8000/api/post/${id}`)
+    .get(`${api}/api/post/${id}`)
     .then((res) =>
       res.data
         ? dispatch(storeOnePost(res.data))
@@ -101,7 +102,7 @@ export const fetchPostById = (id) => (dispatch) => {
 
 export const creatingPost = (body, userId, name) => (dispatch) => {
   axios
-    .post("http://localhost:8000/api/post/create", {
+    .post(`${api}/api/post/create`, {
       body: body,
       userId: userId,
       name: name,
@@ -115,7 +116,7 @@ export const creatingPost = (body, userId, name) => (dispatch) => {
 
 export const commentPost = (name, userId, comment, postId) => (dispatch) => {
   axios
-    .post(`http://localhost:8000/api/post/comment/${postId}`, {
+    .post(`${api}/api/post/comment/${postId}`, {
       name,
       userId,
       comment,
@@ -129,7 +130,7 @@ export const commentPost = (name, userId, comment, postId) => (dispatch) => {
 
 export const likePost = (userId, postId) => (dispatch) => {
   axios
-    .post(`http://localhost:8000/api/post/like/${postId}`, {
+    .post(`${api}/api/post/like/${postId}`, {
       userId,
     })
     .then((res) => {
@@ -141,7 +142,7 @@ export const likePost = (userId, postId) => (dispatch) => {
 
 export const dislikePost = (userId, postId) => (dispatch) => {
   axios
-    .post(`http://localhost:8000/api/post/dislike/${postId}`, {
+    .post(`${api}/api/post/dislike/${postId}`, {
       userId,
     })
     .then((res) => {

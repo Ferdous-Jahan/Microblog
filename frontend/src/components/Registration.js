@@ -7,6 +7,7 @@ import axios from "axios";
 import { setCurrentUser, register } from "../redux/actions/authActions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { api } from "../constants/endpoints";
 
 function Registration() {
   const [email, setEmail] = useState();
@@ -17,7 +18,7 @@ function Registration() {
 
   const handleSubmit = (name, email, password) => {
     axios
-      .post(`http://localhost:8000/api/user/register`, {
+      .post(`${api}/api/user/register`, {
         name,
         email,
         password,
